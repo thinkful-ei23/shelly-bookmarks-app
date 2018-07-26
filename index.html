@@ -9,23 +9,24 @@
 </head>
 <body role="main">
 
-		<form id="js-bookmarks-add-form">
+		<form class="js-bookmarks-add-form">
 			<div class="title-input">
 				<label for="bookmark-title">Title:</label>
-				<input type="text" id="bookmark-title" placeholder="ex: Thinkful Homepage">
+				<input type="text" name="title" id="bookmark-title" placeholder="ex: Thinkful Homepage">
 			</div>
 			<div class="url-input">
 				<label for="bookmark-url">URL:</label>
-				<input type="text" id="js-bookmark-url" placeholder="ex: www.Thinkful.com">
+				<input type="text" name="url" id="js-bookmark-url" placeholder="ex: www.Thinkful.com">
 			</div>
 			<div class="description-input">
 				<label for="bookmark-description">Description:</label>
-				<input type="text" id="js-bookmark-description">
+				<input type="text" name="description" id="bookmark-description">
 			</div>
 			<div class="rating-input">
 				<label for="bookmark-rating">Rating:</label>
-				<input type="text" id="bookmark-rating" placeholder="Please only provide a number between 1 - 5">
+				<input type="text" name="rating" id="bookmark-rating" placeholder="Please only provide a number between 1 - 5">
 			</div>
+			<button type="submit" id="bookmark-submit">Add Bookmark</button>
 		</form>
 	
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
