@@ -15,5 +15,12 @@ const store =(function() {
 	let ratingFilter = 0;
 	let editingMode = false;
 
-	return {bookmarks, ratingFilter, editingMode};
+	const addBookmark = function(item) {
+		item.condensed = true;
+		item.id = cuid();
+		this.bookmarks.push(item);
+		return item;
+	};
+
+	return {bookmarks, ratingFilter, editingMode, addBookmark};
 }() );
