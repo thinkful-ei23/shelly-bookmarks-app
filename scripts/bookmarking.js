@@ -111,8 +111,6 @@ const bookmarkers = (function() {
 			books = store.bookmarks.filter(item => {
 				return item.rating >= store.ratingFilter;
 			});
-			console.log(books);
-
 		}
 		let bookmarkString = generateItemsString(books);
 		$('#bookmark-list').html(bookmarkString);

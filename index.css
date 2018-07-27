@@ -59,7 +59,7 @@ form > div {
 
 #bookmark-list {
 	position: absolute;
-	top: 80px;
+	top: 90px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -72,7 +72,13 @@ li {
 .dropdown {
 	position: absolute;
 	top: 70px;
-	right: 500px;
 	width: 100px;
-	height: 20px;
+	height: 30px;
+}
+
+br {
+	display: block;
+	margin-bottom: 2px;
+  font-size: 2px;
+	line-height: 20px;
 }
