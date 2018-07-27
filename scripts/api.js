@@ -5,23 +5,25 @@ const api =(function() {
 		$.getJSON(BASE_URL + '/bookmarks', callback);
 	};
 
-	const createB = function(object, callback) {
+	const createB = function(object, callback, error) {
 		let newItem = JSON.stringify(object);
 		$.ajax({
 			url : BASE_URL + '/bookmarks',
 			method : 'POST',
 			contentType : 'application/json',
 			data : newItem,
-			success : callback
+			success : callback,
+			error : error
 		});
 	};
 
-	const deleteB = function(id,callback) {
+	const deleteB = function(id,callback, error) {
 		$.ajax({
 			url : BASE_URL + '/bookmarks/' + id,
 			method : 'DELETE',
 			contentType : 'application/json',
-			success : callback
+			success : callback,
+			error : error
 		});
 	};
 

@@ -4,7 +4,6 @@
 const store =(function() {
 	let bookmarks = [];
 	let ratingFilter = 0;
-	let editingMode = false;
 
 	const addBookmark = function(item) {
 		item.condensed = true;
@@ -18,6 +17,12 @@ const store =(function() {
 	const findAndDelete = function(id) {
 		this.bookmarks = this.bookmarks.filter(item => item.id !== id);
 	};
+
+	const throwError = function(message) {
+		let errorMessage = JSON.parse(message.responseText).message;
+		console.log('Error is ' + errorMessage);
+		alert(errorMessage);
+	};
 	
-	return {bookmarks, ratingFilter, editingMode, addBookmark, findById, findAndDelete};
+	return {bookmarks, ratingFilter, addBookmark, findById, findAndDelete, throwError};
 }() );

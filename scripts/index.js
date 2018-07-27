@@ -9,6 +9,8 @@ function handleGenerateBookmark() {
 		api.createB(newBookmark, response => {
 			store.addBookmark(response);
 			$('#bookmark-list').append(generateBookmark(response));
+		}, message => {
+			store.throwError(message);
 		});
 	});
 }
@@ -29,11 +31,14 @@ function generateBookmark(bookmark) {
 		return `
 		<li class="js-bookmark" data-item-id="${bookmark.id}">
 			<div class="js-bookmark-not-button">
-				${bookmark.title}
-				<a href="${bookmark.url}">Visit Site: ${bookmark.url}</a>
-				${bookmark.rating}
-				${bookmark.desc}
+				Title: ${bookmark.title}
+				<br>
+				Rating: ${bookmark.rating}
+				<br>
+				Description: ${bookmark.desc}
 			</div>
+			<a target="_blank" href="${bookmark.url}">Visit Site: ${bookmark.url}</a>
+			<br>
 			<button class="delete-button">
 				<span class="button-label">remove</span>
 			</button>
@@ -44,8 +49,9 @@ function generateBookmark(bookmark) {
 	return `
 		<li class="js-bookmark" data-item-id="${bookmark.id}">
 			<div class="js-bookmark-not-button">
-				${bookmark.title} 
-				${bookmark.rating}
+				Title: ${bookmark.title} 
+				<br>
+				Rating: ${bookmark.rating}
 			</div>
 			<button class="delete-button">
 				<span class="button-label">remove</span>
@@ -89,13 +95,8 @@ function generateItemsString(list) {
 }
 
 function render() {
-	let items = store.bookmarks;
-
-	// render the shopping list in the DOM
-	console.log('`render` ran');
-	const bookmarkString = generateItemsString(items);
-
-	// insert that HTML into the DOM
+	console.log('all here');
+	let bookmarkString = generateItemsString(store.bookmarks);
 	$('#bookmark-list').html(bookmarkString);
 }
 
