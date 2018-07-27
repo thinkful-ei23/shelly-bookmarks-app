@@ -1,16 +1,15 @@
 /* global $, store, bookmarksList, api */
 
-function handleExpand() {
-	//when the condensed block is clicked, toggle condensed property
-}
-
 function handleGenerateBookmark() {
 	//when submit pushed, make a new bookmark
 	$('.js-bookmarks-add-form').on('submit', e => {
 		e.preventDefault();
 		//console.log('submit', e);
 		let newBookmark = serialize(e.target);
-		api.createB(newBookmark, response => console.log(response));
+		api.createB(newBookmark, response => {
+			store.addBookmark(response);
+			$('#bookmark-list').append(generateBookmark(response));
+		});
 	});
 }
 
@@ -19,7 +18,6 @@ function serialize(form) {
 	const obj = {};
 	formData.forEach((val, name) => obj[name] = val);
 	return obj;
-	//return JSON.stringify(obj);
 
 }
 
@@ -38,12 +36,22 @@ function generateBookmark(bookmark) {
 }
 
 function handleRemoveItemClicked() {
-	//removes 
+	
 }
 
 function deleteBookmark(bookmark) {
 	//deletes bookmark when "remove" is clicked
-
+	$('.bookmark-list').on('click', '.delete-button' e => {
+		console.log(e);
+	});
 }
 
-$(handleGenerateBookmark);
+$(document).ready(function() {
+	handleGenerateBookmark();
+	api.getB(response => {
+		response.forEach(item => {
+			store.addBookmark(item);
+			$('#bookmark-list').append(generateBookmark(item));
+		});
+	});
+});

@@ -2,7 +2,7 @@ const api =(function() {
 	const BASE_URL = 'https://thinkful-list-api.herokuapp.com/shelly';
 
 	const getB = function(callback){
-		$.getJSON(BASE_URL + '/items', callback);
+		$.getJSON(BASE_URL + '/bookmarks', callback);
 	};
 
 	const createB = function(object, callback) {
