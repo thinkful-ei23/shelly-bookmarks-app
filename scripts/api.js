@@ -1,3 +1,6 @@
+/* global $ */
+
+// eslint-disable-next-line
 const api =(function() {
 	const BASE_URL = 'https://thinkful-list-api.herokuapp.com/shelly';
 
@@ -27,5 +30,11 @@ const api =(function() {
 		});
 	};
 
-	return {getB, createB, deleteB};
+	const throwError = function(message) {
+		let errorMessage = JSON.parse(message.responseText).message;
+		console.log('Error is ' + errorMessage);
+		alert(errorMessage);
+	};
+
+	return {getB, createB, deleteB, throwError};
 }() );
