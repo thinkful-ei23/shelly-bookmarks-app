@@ -118,6 +118,7 @@ li {
 		position: absolute;
 		top: 90px;
 		left: 350px;
+		overflow-wrap: break-word;
 	}
 }
 
