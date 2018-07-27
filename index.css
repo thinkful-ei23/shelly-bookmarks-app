@@ -124,17 +124,13 @@ li {
 
 @media only screen and (max-width: 414px) {
 
+	body {
+		overflow: scroll;
+	}
 	h1 {
 		text-align: center;
 		font-family: 'Sunflower', sans-serif;
 		font-size: 18px;
-	}
-
-	.js-bookmarks-add-form {
-		text-align: center;
-		margin: auto;
-		width: 250px;
-		position: float;
 	}
 
 	input[type="text"] {
@@ -162,28 +158,38 @@ li {
 			position: absolute;
 			width: 100%;
 			height: 300px;
-			margin-left: auto;
-			margin-right: auto;
 			padding: 5px;
 		}
+		.js-bookmarks-add-form {
+			text-align: center;
+			margin-left: auto;
+			margin-right: auto;
+			top: 25px;
+			left: 70px;
+			width: 50%;
+			position: absolute;
+		}	
 	.bookmarks-section {
 		display: block;
 		padding: 5px;
-		position: relative;
-		top: 300px;
+		position: absolute;
+		top: 280px;
+		width: 100%;
 	}
 	.dropdown {
-		position: relative;
-		margin-left: auto;
-		margin-right: auto;
+		position: absolute;
+		left: 100px;
 		border: solid black .5px;
-		top: 8px;
+		top: 90px;
 		width: 100px;
 		height: 30px;
 	}
 	#bookmark-list {
-		position: relative;
-		top: 10px;
-		width: 100%;
+		position: absolute;
+		top: 140px;
+		width: 90%;
+		left: 20px;
+		overflow-wrap: break-word;
+		border-top: 1px solid gray;
 	}
 }
