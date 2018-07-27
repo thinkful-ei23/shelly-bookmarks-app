@@ -2,16 +2,7 @@
 /* eslint-disable-next-line no-unused-vars */
 
 const store =(function() {
-	let bookmarks = [
-		// {
-		// 	// title: 'Example Bookmark',
-		// 	// url: 'somewhere.com',
-		// 	// desc: 'Lorem Ipsum',
-		// 	// rating: 3,
-		// 	// condensed: true,
-		// 	// id: cuid()
-		// }
-	];
+	let bookmarks = [];
 	let ratingFilter = 0;
 	let editingMode = false;
 

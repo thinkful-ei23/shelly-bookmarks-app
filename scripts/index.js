@@ -1,4 +1,4 @@
-/* global $, store, bookmarksList, api */
+/* global $, store, bookmarks, api */
 
 function handleGenerateBookmark() {
 	//when submit pushed, make a new bookmark
@@ -24,11 +24,29 @@ function serialize(form) {
 
 function generateBookmark(bookmark) {
 	//after receiving key:values from submitted form
+	if (!bookmark.condensed) {
+		console.log('bookmark opened');
+		return `
+		<li class="js-bookmark" data-item-id="${bookmark.id}">
+			<div class="js-bookmark-not-button">
+				${bookmark.title}
+				<a href="${bookmark.url}">Visit Site: ${bookmark.url}</a>
+				${bookmark.rating}
+				${bookmark.desc}
+			</div>
+			<button class="delete-button">
+				<span class="button-label">remove</span>
+			</button>
+	</li>`;
+	}
+
 	console.log('bookmark created');
 	return `
 		<li class="js-bookmark" data-item-id="${bookmark.id}">
-			${bookmark.title} 
-			${bookmark.rating}
+			<div class="js-bookmark-not-button">
+				${bookmark.title} 
+				${bookmark.rating}
+			</div>
 			<button class="delete-button">
 				<span class="button-label">remove</span>
 			</button>
@@ -54,6 +72,17 @@ function handleDeleteBookmark() {
 	});
 }
 
+function handleClickCondensed() {
+	//bookmarks.condensed = false
+	$('#bookmark-list').on('click', '.js-bookmark-not-button', e => {
+		console.log('bookmark clicked to uncondense');
+		const dataId = getItemIdFromElement(e.target);
+		let bookmark = store.findById(dataId);
+		bookmark.condensed = !bookmark.condensed;
+		render();
+	});
+}
+
 function generateItemsString(list) {
 	const items = list.map((item) => generateBookmark(item));
 	return items.join('');
@@ -73,6 +102,7 @@ function render() {
 $(document).ready(function() {
 	handleGenerateBookmark();
 	handleDeleteBookmark();
+	handleClickCondensed();
 	api.getB(response => {
 		response.forEach(item => {
 			store.addBookmark(item);

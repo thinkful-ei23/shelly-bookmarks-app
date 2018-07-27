@@ -1,14 +1,41 @@
 * {
   box-sizing: border-box;
 }
+h1 {
+	text-align: center;
+	font-family: 'Sunflower', sans-serif;
+	font-size: 25px;
+}
 
 body {
-  font-family: 'Roboto', sans-serif;
+	font-family: 'Slabo 27px', serif;
+	font-size: 12px;
+}
+
+.sidebar {
+	background-color: mintcream;
+  display: inline-block;
+  width:30vw;
+  height:80vh;
+  box-align: auto;
+  padding: 40px 20px;
+  border-right: solid grey 2px;
+}
+
+.bookmarks-section {
+  display: inline-block;
+  box-align: auto;
 }
 
 .js-bookmarks-add-form {
+	margin-top: auto;
 	margin-left: auto;
 	margin-right: auto;
 	width: 200px;
 	background-color: mintcream;
+}
+
+ul #bookmark-list {
+	margin-left: auto;
+	margin-right: auto;
 }

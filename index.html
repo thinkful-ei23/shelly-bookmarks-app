@@ -7,7 +7,9 @@
 	<link rel="stylesheet" href="index.css">
 	<title>You've Got Bookmarks!</title>
 </head>
-<body role="main">
+<body>
+	<h1>What Have You Bookmarked Today?</h1>
+	<section role="section" class="sidebar">
 		<form class="js-bookmarks-add-form">
 			<div class="title-input">
 				<label for="bookmark-title">Title:</label>
@@ -27,10 +29,12 @@
 			</div>
 			<button type="submit" id="bookmark-submit">Add Bookmark</button>
 		</form>
-	
+	</section>
+	<main role="main" class="bookmarks-section">
 		<ul id="bookmark-list">
 
 		</ul>
+	</main>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="scripts/store.js"></script>
