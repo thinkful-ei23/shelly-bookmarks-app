@@ -68,3 +68,11 @@ li {
 	padding: 10px;
 	font-size: 15px;
 }
+
+.dropdown {
+	position: absolute;
+	top: 70px;
+	right: 500px;
+	width: 100px;
+	height: 20px;
+}

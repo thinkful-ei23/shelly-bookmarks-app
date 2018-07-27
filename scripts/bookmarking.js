@@ -23,7 +23,6 @@ const bookmarkers = (function() {
 		formData.forEach((val, name) => obj[name] = val);
 		console.log('returning serialized obj');
 		return obj;
-	
 	}
 	
 	function generateBookmark(bookmark) {
@@ -90,6 +89,15 @@ const bookmarkers = (function() {
 			render();
 		});
 	}
+
+	function handleDropdownPicker() {
+		$('.dropdown').on('change', e => {
+			console.log('picked a rating');
+			store.ratingFilter = Number($(e.target).val());
+			console.log(store.ratingFilter);
+			render();
+		});
+	}
 	
 	function generateItemsString(list) {
 		const items = list.map((item) => generateBookmark(item));
@@ -98,7 +106,15 @@ const bookmarkers = (function() {
 	
 	function render() {
 		console.log('all here');
-		let bookmarkString = generateItemsString(store.bookmarks);
+		let books = store.bookmarks;
+		if (store.ratingFilter > 0) {
+			books = store.bookmarks.filter(item => {
+				return item.rating >= store.ratingFilter;
+			});
+			console.log(books);
+
+		}
+		let bookmarkString = generateItemsString(books);
 		$('#bookmark-list').html(bookmarkString);
 	}
 
@@ -106,6 +122,7 @@ const bookmarkers = (function() {
 		handleClickCondensed();
 		handleDeleteBookmark();
 		handleGenerateBookmark();
+		handleDropdownPicker();
 	}
 
 	return {
