@@ -27,27 +27,33 @@ const bookmarkers = (function() {
 	
 	function generateBookmark(bookmark) {
 		//after receiving key:values from submitted form
+		let bookmarkTemplate = '';
 		if (!bookmark.condensed) {
 			console.log('bookmark opened');
-			return `
+			bookmarkTemplate = `
 			<li class="js-bookmark" data-item-id="${bookmark.id}">
 				<div class="js-bookmark-not-button">
-					Title: ${bookmark.title}
-					<br>
-					Rating: ${bookmark.rating}
-					<br>
-					Description: ${bookmark.desc}
+					<span><strong>Title: ${bookmark.title}</strong></span>
+					<form class="editing-information>
+						<label for="title-edit">Rating: </label>
+						<input type="text" name="title-edit" class="title-edit-input" value="${bookmark.rating}" />
+						<br>
+						<label for="title-edit">Description: </label>
+						<input type="text" name="title-edit" class="title-edit-input" value="${bookmark.desc}" />
+					</form>
 				</div>
 				<a target="_blank" href="${bookmark.url}">Visit Site: ${bookmark.url}</a>
 				<br>
 				<button class="delete-button">
 					<span class="button-label">remove</span>
 				</button>
+				<button class="view-button-expanded">
+					<span class="view-button-label">condense</span>
+				</button>
 		</li>`;
-		}
-	
-		console.log('bookmark created');
-		return `
+		} else { 		
+			console.log('bookmark created');
+			bookmarkTemplate = `
 			<li class="js-bookmark" data-item-id="${bookmark.id}">
 				<div class="js-bookmark-not-button">
 					Title: ${bookmark.title} 
@@ -57,7 +63,13 @@ const bookmarkers = (function() {
 				<button class="delete-button">
 					<span class="button-label">remove</span>
 				</button>
+				<button class="view-button">
+					<span class="view-button-label">expand</span>
+				</button>
 			</li>`;
+		}
+	
+		return bookmarkTemplate;
 	}
 	
 	
@@ -74,18 +86,27 @@ const bookmarkers = (function() {
 			const dataId = getItemIdFromElement(e.target);
 			console.log('delete pressed');
 			//console.log(dataId);
-			api.deleteB(dataId, store.findAndDelete(dataId));
-			render();
+			api.deleteB(dataId, function() {
+				store.findAndDelete(dataId);
+				render();
+			});
 		});
 	}
 	
 	function handleClickCondensed() {
 		//bookmarks.condensed = false
-		$('#bookmark-list').on('click', '.js-bookmark-not-button', e => {
+		$('#bookmark-list').on('click', '.view-button', e => {
 			console.log('bookmark clicked to uncondense');
 			const dataId = getItemIdFromElement(e.target);
 			let bookmark = store.findById(dataId);
-			bookmark.condensed = !bookmark.condensed;
+			bookmark.condensed = false;
+			render();
+		});
+		$('#bookmark-list').on('click', '.view-button-expanded', e => {
+			console.log('bookmark clicked to condense');
+			const dataId = getItemIdFromElement(e.target);
+			let bookmark = store.findById(dataId);
+			bookmark.condensed = true;
 			render();
 		});
 	}
