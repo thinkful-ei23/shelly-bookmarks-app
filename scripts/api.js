@@ -20,7 +20,7 @@ const api =(function() {
 		});
 	};
 
-	const deleteB = function(id,callback, error) {
+	const deleteB = function(id, callback, error) {
 		$.ajax({
 			url : BASE_URL + '/bookmarks/' + id,
 			method : 'DELETE',
@@ -30,11 +30,22 @@ const api =(function() {
 		});
 	};
 
+	const update = function(id, data, callback, error) {
+		$.ajax({
+			url: BASE_URL + '/bookmarks/' + id,
+			method : 'PATCH',
+			contentType : 'application/json',
+			data: data,
+			success: callback,
+			error: error,
+		});
+	};
+
 	const throwError = function(message) {
 		let errorMessage = JSON.parse(message.responseText).message;
 		console.log('Error is ' + errorMessage);
 		alert(errorMessage);
 	};
 
-	return {getB, createB, deleteB, throwError};
+	return {getB, createB, deleteB, throwError, update};
 }() );

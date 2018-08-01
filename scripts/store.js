@@ -15,6 +15,10 @@ const store =(function() {
 	const findAndDelete = function(id) {
 		this.bookmarks = this.bookmarks.filter(item => item.id !== id);
 	};
+	const findAndUpdate = function(id, newData) {
+		let newItem = this.findById(id);
+		Object.assign(newItem, newData);
+	};
 	
-	return {bookmarks, ratingFilter, addBookmark, findById, findAndDelete};
+	return {bookmarks, ratingFilter, addBookmark, findById, findAndDelete, findAndUpdate};
 }() );

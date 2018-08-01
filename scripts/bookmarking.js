@@ -1,4 +1,4 @@
-/* global $, store, api */
+/* global $, store, api, e */
 
 // eslint-disable-next-line
 const bookmarkers = (function() {
@@ -36,10 +36,10 @@ const bookmarkers = (function() {
 					<span><strong>Title: ${bookmark.title}</strong></span>
 					<form class="editing-information>
 						<label for="title-edit">Rating: </label>
-						<input type="text" name="title-edit" class="title-edit-input" value="${bookmark.rating}" />
+						<input type="text" name="title-edit" class="title-edit-rating" value="${bookmark.rating}" />
 						<br>
 						<label for="title-edit">Description: </label>
-						<input type="text" name="title-edit" class="title-edit-input" value="${bookmark.desc}" />
+						<input type="text" name="title-edit" class="title-edit-desc" value="${bookmark.desc}" />
 					</form>
 				</div>
 				<a target="_blank" href="${bookmark.url}">Visit Site: ${bookmark.url}</a>
@@ -49,6 +49,9 @@ const bookmarkers = (function() {
 				</button>
 				<button class="view-button-expanded">
 					<span class="view-button-label">condense</span>
+				</button>
+				<button type="submit" class="save-button">
+					<span class="save-button-label">save</span>
 				</button>
 		</li>`;
 		} else { 		
@@ -64,7 +67,7 @@ const bookmarkers = (function() {
 					<span class="button-label">remove</span>
 				</button>
 				<button class="view-button">
-					<span class="view-button-label">expand</span>
+					<span class="view-button-label">expand and edit</span>
 				</button>
 			</li>`;
 		}
@@ -90,6 +93,30 @@ const bookmarkers = (function() {
 				store.findAndDelete(dataId);
 				render();
 			});
+		});
+	}
+
+	function handleEditSubmit() {
+		$('#bookmark-list').on('click', '.save-button', e => {
+			e.preventDefault();
+			console.log('saved');
+			const newRating = $('.title-edit-rating').val();
+			const newDesc = $('.title-edit-desc').val();
+			const dataId = getItemIdFromElement(e.target);
+			let ratingStringify = JSON.stringify({
+				rating : newRating
+			});
+			let descStringify = JSON.stringify({
+				desc : newDesc
+			});
+			api.update(dataId, ratingStringify, function() {
+				store.findAndUpdate(dataId, newRating);
+				render();
+			});
+			api.update(dataId, descStringify, function() {
+				store.findAndUpdate(dataId, newDesc);
+				render();
+			});			
 		});
 	}
 	
@@ -142,6 +169,7 @@ const bookmarkers = (function() {
 		handleDeleteBookmark();
 		handleGenerateBookmark();
 		handleDropdownPicker();
+		handleEditSubmit();
 	}
 
 	return {

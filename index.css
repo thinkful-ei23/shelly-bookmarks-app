@@ -12,6 +12,11 @@ body {
 	font-size: 12px;
 }
 
+input[type="number"] {
+	padding: 5px;
+	width: 300px;
+	text-align: top;
+}
 input[type="text"] {
 	padding: 5px;
 	width: 300px;
